@@ -2,7 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 const Input = ({ secretWord }) => {
-	return <div data-test='component-input'/>
+	const [currentGuess, setCurrentGuess] = React.useState('');
+
+	return (
+		<div data-test='component-input'>
+			<form className='form-inline'>
+				<input
+					className='mb-2 mx-sm-3'
+					type='text'
+					placeholder='enter guess'
+					data-test='input-box'
+					value={ currentGuess }
+					onChange={ (event) => setCurrentGuess(event.target.value) }
+				/>
+
+				<button
+					className='btn btn-primary'
+					data-test='submit-button'
+					onClick={ (event) => {
+						event.preventDefault();
+
+						setCurrentGuess('');
+					} }
+				>
+					Submit
+				</button>
+			</form>
+		</div>
+	);
 };
 
 Input.propTypes = {

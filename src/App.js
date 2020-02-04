@@ -26,16 +26,28 @@ const reducer = (state, action) => {
 };
 
 function App() {
-	const [state, dispatch] = React.useReducer(reducer, { secretWord: null });
+	const [{secretWord}, dispatch] = React.useReducer(reducer, { secretWord: null });
 	const setSecretWord = (secretWord) => dispatch({ type: 'setSecretWord', payload: secretWord });
 
 	React.useEffect(() => {
 		hookActions.getSecretWord(setSecretWord);
 	}, []);
 
+	if(!secretWord) {
+		return (
+			<div className='container' data-test='spinner'>
+				<div className='spinner-border' role='status'>
+					<span className='sr-only'>Loading...</span>
+				</div>
+
+				<p>Loading secret word</p>
+			</div>
+		);
+	}
+
 	return (
-		<div data-test='component-app'>
-			<Input secretWord={state.secretWord}/>
+		<div className='container' data-test='component-app'>
+			<Input secretWord={secretWord}/>
 		</div>
 	);
 }

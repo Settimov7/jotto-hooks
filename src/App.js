@@ -35,15 +35,15 @@ const reducer = (state, action) => {
 };
 
 function App() {
-	const [{secretWord, language}, dispatch] = React.useReducer(reducer, { secretWord: null });
+	const [{ secretWord, language }, dispatch] = React.useReducer(reducer, { secretWord: null, language: 'en' });
 	const setSecretWord = (secretWord) => dispatch({ type: 'setSecretWord', payload: secretWord });
-	const setLanguage = (language) => dispatch({ type: 'setLanguage' , payload: language});
+	const setLanguage = (language) => dispatch({ type: 'setLanguage', payload: language });
 
 	React.useEffect(() => {
 		hookActions.getSecretWord(setSecretWord);
 	}, []);
 
-	if(!secretWord) {
+	if (!secretWord) {
 		return (
 			<div className='container' data-test='spinner'>
 				<div className='spinner-border' role='status'>
@@ -58,9 +58,9 @@ function App() {
 	return (
 		<div className='container' data-test='component-app'>
 			<h1>Jotto</h1>
-			<languageContext.Provider value={language}>
-				<LanguagePicker setLanguage={setLanguage}/>
-				<Input secretWord={secretWord}/>
+			<languageContext.Provider value={ language }>
+				<LanguagePicker setLanguage={ setLanguage }/>
+				<Input secretWord={ secretWord }/>
 			</languageContext.Provider>
 		</div>
 	);

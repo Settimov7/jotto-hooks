@@ -6,6 +6,8 @@ import languageContext from './contexts/languageContext';
 import LanguagePicker from './LanguagePicker';
 import successContext from './contexts/successContext';
 import Congrats from './Congrats';
+import guessedWordsContext from './contexts/guessedWordsContext';
+import GuessedWords from './GuessedWords';
 
 /**
  * reducer to update state, called automatically by dispatch
@@ -63,10 +65,15 @@ function App() {
 			<languageContext.Provider value={ language }>
 				<LanguagePicker setLanguage={ setLanguage }/>
 
-				<successContext.SuccessProvider>
-					<Congrats/>
-					<Input secretWord={ secretWord }/>
-				</successContext.SuccessProvider>
+				<guessedWordsContext.GuessedWordsProvider>
+					<successContext.SuccessProvider>
+						<Congrats/>
+
+						<Input secretWord={ secretWord }/>
+					</successContext.SuccessProvider>
+
+					<GuessedWords />
+				</guessedWordsContext.GuessedWordsProvider>
 			</languageContext.Provider>
 		</div>
 	);

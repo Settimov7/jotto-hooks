@@ -31,6 +31,10 @@ const Input = ({ secretWord }) => {
 					onClick={ (event) => {
 						event.preventDefault();
 
+						if (currentGuess === secretWord) {
+							setSuccess(true);
+						}
+
 						setCurrentGuess('');
 					} }
 				>
